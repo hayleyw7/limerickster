@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Limerickster preview">
+  <defs>
+    <radialGradient id="bg-lav" cx="10%" cy="0%" rx="80%" ry="50%">
+      <stop offset="0%" stop-color="#d4c5f9"/>
+      <stop offset="55%" stop-color="#d4c5f9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-peach" cx="90%" cy="10%" rx="60%" ry="40%">
+      <stop offset="0%" stop-color="#fde8d8"/>
+      <stop offset="50%" stop-color="#fde8d8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#faf6ef"/>
+  <rect width="1200" height="630" fill="url(#bg-lav)"/>
+  <rect width="1200" height="630" fill="url(#bg-peach)"/>
+
+  <text x="600" y="210" text-anchor="middle" font-family="Georgia" font-size="108" font-weight="bold" fill="#1a1423" letter-spacing="-2">Limerickster</text>
+
+  <text x="600" y="145" text-anchor="middle" font-family="Helvetica" font-size="22" font-weight="bold" fill="#3d8b7a" letter-spacing="4.4">AI-POWERED VERSE FACTORY</text>
+
+  <text x="600" y="275" text-anchor="middle" font-family="Helvetica" font-size="30" fill="#6b5f72">Tell us about someone and we&apos;ll write them a limerick.</text>
+
+  <g transform="translate(600 390)" text-anchor="middle" font-family="Helvetica" font-size="20" font-weight="bold">
+    <text x="-180" y="0" fill="#e85d4c">A</text>
+    <text x="-60" y="0" fill="#e85d4c">A</text>
+    <text x="60" y="0" fill="#3d8b7a">B</text>
+    <text x="180" y="0" fill="#3d8b7a">B</text>
+    <text x="300" y="0" fill="#e85d4c">A</text>
+  </g>
+
+  <rect x="420" y="430" width="360" height="56" rx="8" fill="#3d8b7a"/>
+  <text x="600" y="467" text-anchor="middle" font-family="Helvetica" font-size="22" font-weight="bold" fill="#ffffff">Generate Limerick</text>
+</svg>

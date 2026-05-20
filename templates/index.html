@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limerickster</title>
+  <meta name="description" content="{{ site_description }}">
+  <meta name="theme-color" content="#faf6ef">
+
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+  <link rel="icon" href="{{ url_for('static', filename='favicon-32.png') }}" sizes="32x32" type="image/png">
+  <link rel="icon" href="{{ url_for('static', filename='favicon-16.png') }}" sizes="16x16" type="image/png">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Limerickster">
+  <meta property="og:title" content="Limerickster">
+  <meta property="og:description" content="{{ site_description }}">
+  <meta property="og:image" content="{{ site_og_image or url_for('static', filename='og-image.jpg', _external=True) }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Limerickster — AI-powered limerick generator">
+  <meta property="og:url" content="{{ site_canonical_url or request.url_root }}">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Limerickster">
+  <meta name="twitter:description" content="{{ site_description }}">
+  <meta name="twitter:image" content="{{ site_og_image or url_for('static', filename='og-image.jpg', _external=True) }}">
+  <meta name="twitter:image:alt" content="Limerickster — AI-powered limerick generator">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">AI-powered verse factory</p>
+      <h1>Limerickster</h1>
+      <p class="subtitle">Tell us about someone and we’ll write them a limerick.</p>
+    </header>
+
+    <main class="layout">
+      <section class="card form-card">
+        <h2>Who is this limerick about?</h2>
+        <form id="profile-form">
+          <div class="field">
+            <label for="name">Name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="location">Location <span class="req">*</span></label>
+              <input type="text" id="location" name="location" required>
+            </div>
+            <div class="field">
+              <label id="pronouns-label" for="pronouns">Pronouns <span class="req">*</span></label>
+              <div class="custom-select" data-custom-select>
+                <select id="pronouns" name="pronouns" class="custom-select-native" required tabindex="-1" aria-hidden="true">
+                  <option value="they/them" selected>they/them</option>
+                  <option value="she/her">she/her</option>
+                  <option value="he/him">he/him</option>
+                </select>
+                <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="pronouns-label pronouns-display">
+                  <span class="custom-select-value" id="pronouns-display"></span>
+                  <span class="custom-select-chevron" aria-hidden="true"></span>
+                </button>
+                <ul class="custom-select-menu" role="listbox" tabindex="-1" hidden></ul>
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="hobbies">
+            <legend>Hobbies</legend>
+            <div class="field">
+              <label for="hobby_1">Hobby 1 <span class="req">*</span></label>
+              <input type="text" id="hobby_1" name="hobby_1" required>
+            </div>
+            <div class="field">
+              <label for="hobby_2">Hobby 2 <span class="req">*</span></label>
+              <input type="text" id="hobby_2" name="hobby_2" required>
+            </div>
+            <div class="field">
+              <label for="hobby_3">Hobby 3 <span class="req">*</span></label>
+              <input type="text" id="hobby_3" name="hobby_3" required>
+            </div>
+          </fieldset>
+
+          <h3 class="form-section-heading">Optional Extras</h3>
+
+          <div class="field">
+            <label for="pets">Pets</label>
+            <input type="text" id="pets" name="pets">
+          </div>
+          <div class="field">
+            <label for="favorite_food">Favorite food or drink</label>
+            <input type="text" id="favorite_food" name="favorite_food">
+          </div>
+
+          <div class="field">
+            <label for="physical_trait">Appearance</label>
+            <input type="text" id="physical_trait" name="physical_trait">
+          </div>
+
+          <div class="field">
+            <label for="job">Job</label>
+            <input type="text" id="job" name="job">
+          </div>
+
+          <div class="field">
+            <label for="other_notes">Other Notes</label>
+            <p class="form-hint" id="other-notes-hint">
+              Anything else to include (such as partner named Glorbo, inside joke about hamburgers, or "you absolutely have to mention X no matter what")
+            </p>
+            <textarea
+              id="other_notes"
+              name="other_notes"
+              rows="3"
+              aria-describedby="other-notes-hint"
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label id="tone-label" for="tone">Tone</label>
+            <div class="custom-select" data-custom-select>
+              <select id="tone" name="tone" class="custom-select-native" tabindex="-1" aria-hidden="true">
+                <option value="cheerful">cheerful</option>
+                <option value="wholesome">wholesome</option>
+                <option value="sarcastic">sarcastic</option>
+                <option value="dramatic">dramatic</option>
+                <option value="absurd">absurd</option>
+                <option value="romantic">romantic</option>
+              </select>
+              <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="tone-label tone-display">
+                <span class="custom-select-value" id="tone-display"></span>
+                <span class="custom-select-chevron" aria-hidden="true"></span>
+              </button>
+              <ul class="custom-select-menu" role="listbox" tabindex="-1" hidden></ul>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="submit-btn">
+            <span class="btn-label">Generate Limerick</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="results" id="results" hidden>
+        <div class="card highlight-card" id="limerick-results">
+          <h2>Your Limerick</h2>
+          <p id="error-msg" class="error" hidden></p>
+          <pre id="limerick" class="limerick"></pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
