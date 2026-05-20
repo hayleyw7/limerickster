@@ -13,7 +13,7 @@ short_description: Turn a profile into a custom five-line limerick.
 
 Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, playful and personal).
 
-**Live app:** [huggingface.co/spaces/hayleyw7/limerickster](https://huggingface.co/spaces/hayleyw7/limerickster)
+**Live app:** https://huggingface.co/spaces/hayleyw7/limerickster
 
 ## Form fields
 
@@ -23,7 +23,7 @@ Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, pla
 | **Location** | Yes | City or region (great for rhymes) |
 | **Pronouns** | Yes | She/her, he/him, or they/them (strictly enforced in the poem) |
 | **Hobbies 1–3** | Yes | All three hobbies are required |
-| **Pets** | No | Furry (or scaly) co-stars |
+| **Pets** | No | Pets and animal companions |
 | **Favorite food or drink** | No | Sensory detail |
 | **Appearance** | No | Look and style detail for the poem |
 | **Job** | No | Day job or dream job |
