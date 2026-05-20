@@ -6,7 +6,7 @@ colorTo: pink
 sdk: docker
 app_port: 7860
 pinned: false
-short_description: Turn a profile into a custom five-line limerick.
+short_description: Need to create a limerick? Have AI do it!
 ---
 
 # Limerickster
