@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+.hf_token
 
 # Python
 __pycache__/
