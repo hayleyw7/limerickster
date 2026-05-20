@@ -1,3 +1,14 @@
+---
+title: Limerickster
+emoji: 🎭
+colorFrom: yellow
+colorTo: pink
+sdk: docker
+app_port: 7860
+pinned: false
+short_description: Turn a profile into a custom five-line limerick.
+---
+
 # Limerickster
 
 Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, playful and personal).
