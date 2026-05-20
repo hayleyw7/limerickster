@@ -2,6 +2,8 @@
 
 Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, playful and personal).
 
+**Live app:** [huggingface.co/spaces/hayleyw7/limerickster](https://huggingface.co/spaces/hayleyw7/limerickster)
+
 ## Form fields
 
 | Field | Required? | Purpose |
@@ -79,3 +81,7 @@ Behind a reverse proxy, configure your proxy to set `X-Forwarded-For` so limits 
 
 - Python 3.10+
 - A free [Groq API key](https://console.groq.com/keys)
+
+## License
+
+Licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html) (GPL-3.0).
