@@ -73,6 +73,8 @@ def _exempt_localhost():
     return request.remote_addr in ("127.0.0.1", "::1")
 
 SITE_DESCRIPTION = "Easily create a personalized limerick from a few details."
+# Bump when og-image.jpg changes so crawlers (Discord, preview tools) refetch.
+OG_IMAGE_VERSION = "verse-factory"
 
 
 def _public_site_url() -> str:
@@ -90,7 +92,7 @@ def inject_site_meta():
     if site_url:
         return {
             "site_description": SITE_DESCRIPTION,
-            "site_og_image": f"{site_url}/static/og-image.jpg",
+            "site_og_image": f"{site_url}/static/og-image.jpg?v={OG_IMAGE_VERSION}",
             "site_canonical_url": f"{site_url}/",
         }
     return {
