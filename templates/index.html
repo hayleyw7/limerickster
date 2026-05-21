@@ -33,7 +33,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -41,12 +41,12 @@
     <header class="hero">
       <p class="eyebrow">AI-powered verse factory</p>
       <h1>Limerickster</h1>
-      <p class="subtitle">Tell us about someone and we’ll write them a limerick.</p>
+      <p class="subtitle">Tell us about someone, & we'll write a five-line poem.</p>
     </header>
 
     <main class="layout">
       <section class="card form-card">
-        <h2>Who is this limerick about?</h2>
+        <h2>Describe your subject</h2>
         <form id="profile-form">
           <div class="field">
             <label for="name">Name <span class="req">*</span></label>
@@ -115,7 +115,7 @@
           <div class="field">
             <label for="other_notes">Other Notes</label>
             <p class="form-hint" id="other-notes-hint">
-              Anything else to include (such as partner named Glorbo, inside joke about hamburgers, or "you absolutely have to mention X no matter what")
+              Anything else to include (such as partner named Glorbo, inside joke about pizza, or avoid a topic entirely)
             </p>
             <textarea
               id="other_notes"
@@ -150,11 +150,11 @@
         </form>
       </section>
 
-      <section class="results" id="results" hidden>
+      <section class="results" id="results">
         <div class="card highlight-card" id="limerick-results">
-          <h2>Your Limerick</h2>
+          <h2>A Limerick for<span id="limerick-subject-name"></span></h2>
           <p id="error-msg" class="error" hidden></p>
-          <pre id="limerick" class="limerick"></pre>
+          <pre id="limerick" class="limerick" hidden></pre>
         </div>
       </section>
     </main>

@@ -100,7 +100,7 @@ def generate_og() -> None:
     _center_text(
         draw,
         318,
-        "Tell us about someone — we'll write a five-line poem.",
+        "Tell us about someone, & we'll write a five-line poem.",
         body_font(28),
         MUTED,
     )

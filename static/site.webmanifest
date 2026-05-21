@@ -1,7 +1,7 @@
 {
   "name": "Limerickster",
   "short_name": "Limerickster",
-  "description": "Tell us about someone and we'll write them a limerick.",
+  "description": "Tell us about someone, & we'll write a five-line poem.",
   "icons": [
     {
       "src": "/static/apple-touch-icon.png",

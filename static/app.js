@@ -95,7 +95,18 @@ const errorMsg = document.getElementById("error-msg");
 const submitBtn = document.getElementById("submit-btn");
 const btnLabel = submitBtn.querySelector(".btn-label");
 const limerickResults = document.getElementById("limerick-results");
+const nameInput = document.getElementById("name");
+const subjectNameEl = document.getElementById("limerick-subject-name");
+const limerickEl = document.getElementById("limerick");
 let hasGenerated = false;
+
+function updateLimerickHeading(name) {
+  const display = (name ?? nameInput.value).trim();
+  subjectNameEl.textContent = display ? ` ${display}` : "…";
+}
+
+nameInput.addEventListener("input", () => updateLimerickHeading());
+updateLimerickHeading();
 
 function setLoading(loading) {
   submitBtn.disabled = loading;
@@ -107,12 +118,10 @@ function setLoading(loading) {
 }
 
 function showError(message) {
-  const limerickEl = document.getElementById("limerick");
   errorMsg.textContent = message;
   errorMsg.hidden = !message;
   if (message) {
     limerickEl.hidden = true;
-    results.hidden = false;
     scrollToLimerick();
   } else {
     limerickEl.hidden = false;
@@ -125,12 +134,11 @@ function scrollToLimerick() {
   });
 }
 
-function renderKit(kit) {
+function renderKit(kit, profile) {
   showError("");
-  const limerickEl = document.getElementById("limerick");
+  if (profile?.name) updateLimerickHeading(profile.name);
   limerickEl.textContent = kit.limerick || "";
   limerickEl.hidden = false;
-  results.hidden = false;
   hasGenerated = true;
   scrollToLimerick();
 }
@@ -160,7 +168,7 @@ form.addEventListener("submit", async (e) => {
       );
     }
 
-    renderKit(payload.kit);
+    renderKit(payload.kit, payload.profile);
   } catch (err) {
     showError(err.message);
   } finally {
