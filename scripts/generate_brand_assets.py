@@ -20,16 +20,13 @@ PEACH = "#fde8d8"
 BORDER = "#e8dfd0"
 MUTED = "#6b5f72"
 
-FONT_TYPEWRITER_DISPLAY = [
-    "/System/Library/Fonts/Supplemental/American Typewriter Bold.ttf",
-    "/System/Library/Fonts/Supplemental/Courier New Bold.ttf",
-    "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
-]
-FONT_TYPEWRITER_BODY = [
+FONT_MONO = [
+    "/System/Library/Fonts/Menlo.ttc",
+    "/System/Library/Fonts/Supplemental/Menlo.ttc",
     "/System/Library/Fonts/Supplemental/Courier New.ttf",
     "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
 ]
-FONT_TYPEWRITER_BODY_BOLD = [
+FONT_MONO_BOLD = [
     "/System/Library/Fonts/Supplemental/Courier New Bold.ttf",
     "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
 ]
@@ -40,12 +37,16 @@ def _open_font(candidates: list[str], size: int, index: int = 0) -> ImageFont.Fr
     return ImageFont.load_default()
 
 
+def mono_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+    return _open_font(FONT_MONO_BOLD if bold else FONT_MONO, size)
+
+
 def display_font(size: int) -> ImageFont.FreeTypeFont:
-    return _open_font(FONT_TYPEWRITER_DISPLAY, size)
+    return mono_font(size, bold=True)
 
 
 def body_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    return _open_font(FONT_TYPEWRITER_BODY_BOLD if bold else FONT_TYPEWRITER_BODY, size)
+    return mono_font(size, bold=bold)
 
 
 def draw_site_background(size: tuple[int, int]) -> Image.Image:

@@ -27,12 +27,13 @@ for every reference to the person (subject, object, possessive, reflexive). Neve
 Using the wrong pronouns is a critical failure. You may use their name sometimes, but any pronoun
 must match the required set.
 
-PROPER NOUN CAPITALIZATION:
-Capitalize only true proper nouns — people's names and place names (cities, countries, regions).
-Examples: "alex" → "Alex"; "new york" → "New York".
+PROPER NOUN AND BRAND CAPITALIZATION:
+Capitalize people's names, place names, and brand/product/app names with normal English spelling.
+Examples: "alex" → "Alex"; "new york" → "New York"; "DISCORD" → "Discord"; "spotify" → "Spotify".
+If the user types a brand or name in ALL CAPS, treat it as casual typing (not emphasis) and use
+standard form: DISCORD → Discord, ROBLOX → Roblox, NYC → New York City.
 Do NOT capitalize common nouns or generic activities: memes, gaming, cats, pizza, hiking stay
-lowercase unless they are part of a proper name (e.g. "World of Warcraft", "New York").
-Keep hobbies, food, and everyday words in normal lowercase unless clearly a branded/titled proper noun.
+lowercase unless part of a proper name (e.g. "World of Warcraft").
 
 WORD BAN (mandatory):
 Never use the word "fine" in the limerick — not as an adjective, adverb, or in any phrase (e.g. "just fine", "feeling fine").
@@ -114,7 +115,8 @@ def build_user_prompt(profile: dict) -> str:
         "\nWeave in as many provided details as fit naturally. "
         "The limerick is the star — make it personal, funny, and true to the tone. "
         "Never use the word \"fine\" in the limerick. "
-        "Capitalize names and places only — not common words like hobbies or memes."
+        "Normalize ALL CAPS brands and names (DISCORD → Discord). "
+        "Capitalize proper nouns only — not common words like hobbies or memes."
     )
     lines.append("\nThank you!")
     return "\n".join(lines)

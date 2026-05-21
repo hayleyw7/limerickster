@@ -13,6 +13,6 @@
   <rect width="32" height="32" rx="8" fill="url(#lav)"/>
   <rect width="32" height="32" rx="8" fill="url(#peach)"/>
   <rect x="6" y="5" width="20" height="3" rx="1" fill="#3d8b7a"/>
-  <text x="16" y="21" text-anchor="middle" font-family="'American Typewriter', 'Courier New', monospace" font-size="15" font-weight="bold" fill="#1a1423">L</text>
+  <text x="16" y="21" text-anchor="middle" font-family="'IBM Plex Mono', Menlo, Consolas, monospace" font-size="15" font-weight="500" fill="#1a1423">L</text>
   <circle cx="26" cy="26" r="2.5" fill="#e85d4c"/>
 </svg>

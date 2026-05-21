@@ -1,7 +1,6 @@
 :root {
   --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-  --font-typewriter-display: "Special Elite", "Courier New", Courier, monospace;
-  --font-typewriter-input: "Courier Prime", "Courier New", Courier, monospace;
+  --font-mono: "IBM Plex Mono", "Menlo", "Consolas", monospace;
   --ink: #1a1423;
   --cream: #faf6ef;
   --accent: #e85d4c;
@@ -55,7 +54,7 @@ body {
 }
 
 .hero h1 {
-  font-family: var(--font-typewriter-display);
+  font-family: var(--font-mono);
   font-size: clamp(2.5rem, 6vw, 3.75rem);
   font-weight: 400;
   margin: 0;
@@ -88,6 +87,10 @@ body {
   .results {
     grid-column: 2;
   }
+}
+
+#results {
+  scroll-margin-top: 1.25rem;
 }
 
 .card {
@@ -143,7 +146,7 @@ input,
 textarea {
   width: 100%;
   padding: 0.65rem 0.85rem;
-  font-family: var(--font-typewriter-input);
+  font-family: var(--font-mono);
   font-size: inherit;
   line-height: 1.5;
   border: 1px solid var(--border);
@@ -193,7 +196,7 @@ textarea:focus {
   min-height: var(--control-height);
   padding: 0.65rem 0.85rem;
   box-sizing: border-box;
-  font-family: var(--font-typewriter-input);
+  font-family: var(--font-mono);
   font-size: inherit;
   font-weight: 400;
   line-height: 1.5;
@@ -261,7 +264,7 @@ textarea:focus {
 
 .custom-select-option {
   padding: 0.6rem 0.85rem;
-  font-family: var(--font-typewriter-input);
+  font-family: var(--font-mono);
   font-size: inherit;
   font-weight: 500;
   color: var(--ink);
@@ -388,6 +391,7 @@ fieldset.hobbies legend {
 .highlight-card {
   background: linear-gradient(135deg, #fff9f5 0%, #f3ede8 100%);
   border-color: #e0d0c0;
+  scroll-margin-top: 1.25rem;
 }
 
 .repo-label {
@@ -410,11 +414,34 @@ fieldset.hobbies legend {
 }
 
 .limerick {
-  font-family: var(--font-typewriter-display);
+  font-family: var(--font-mono);
   font-size: 1.15rem;
   line-height: 1.7;
   margin: 0;
   white-space: pre-wrap;
+}
+
+.limerick-cursor {
+  display: inline-block;
+  width: 0.12em;
+  min-width: 2px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.08em;
+  background: var(--ink);
+  animation: limerick-cursor-blink 0.65s step-end infinite;
+}
+
+@keyframes limerick-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .limerick-cursor {
+    display: none;
+  }
 }
 
 .card-header {

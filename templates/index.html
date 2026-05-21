@@ -33,7 +33,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -46,7 +46,7 @@
 
     <main class="layout">
       <section class="card form-card">
-        <h2>Describe Your Subject</h2>
+        <h2>Describe your subject</h2>
         <form id="profile-form">
           <div class="field">
             <label for="name">Name <span class="req">*</span></label>
@@ -91,7 +91,7 @@
             </div>
           </fieldset>
 
-          <h3 class="form-section-heading">Optional Extras</h3>
+          <h3 class="form-section-heading">Optional extras</h3>
 
           <div class="field">
             <label for="pets">Pets</label>
@@ -152,7 +152,7 @@
 
       <section class="results" id="results">
         <div class="card highlight-card" id="limerick-results">
-          <h2>A Limerick for<span id="limerick-subject-name"></span></h2>
+          <h2>A limerick for<span id="limerick-subject-name"></span></h2>
           <p id="error-msg" class="error" hidden></p>
           <pre id="limerick" class="limerick" hidden></pre>
         </div>

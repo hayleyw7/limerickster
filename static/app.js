@@ -94,14 +94,68 @@ const results = document.getElementById("results");
 const errorMsg = document.getElementById("error-msg");
 const submitBtn = document.getElementById("submit-btn");
 const btnLabel = submitBtn.querySelector(".btn-label");
+const resultsSection = document.getElementById("results");
 const limerickResults = document.getElementById("limerick-results");
 const nameInput = document.getElementById("name");
 const subjectNameEl = document.getElementById("limerick-subject-name");
 const limerickEl = document.getElementById("limerick");
 let hasGenerated = false;
+let typewriterTimer = null;
 
-function updateLimerickHeading(name) {
-  const display = (name ?? nameInput.value).trim();
+function cancelTypewriter() {
+  if (typewriterTimer !== null) {
+    clearTimeout(typewriterTimer);
+    typewriterTimer = null;
+  }
+}
+
+function typeLimerick(el, text) {
+  cancelTypewriter();
+  const fullText = text || "";
+  el.hidden = false;
+  el.classList.remove("is-done");
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    el.textContent = fullText;
+    return;
+  }
+
+  el.textContent = "";
+  const textSpan = document.createElement("span");
+  textSpan.className = "limerick-text";
+  const cursor = document.createElement("span");
+  cursor.className = "limerick-cursor";
+  cursor.setAttribute("aria-hidden", "true");
+  el.append(textSpan, cursor);
+  el.classList.add("is-typing");
+
+  let index = 0;
+  const charDelay = 32;
+  const newlineDelay = 140;
+
+  function finish() {
+    typewriterTimer = null;
+    el.classList.remove("is-typing");
+    el.classList.add("is-done");
+    cursor.remove();
+  }
+
+  function tick() {
+    if (index >= fullText.length) {
+      finish();
+      return;
+    }
+    const ch = fullText[index++];
+    textSpan.textContent += ch;
+    const delay = ch === "\n" ? newlineDelay : charDelay;
+    typewriterTimer = window.setTimeout(tick, delay);
+  }
+
+  tick();
+}
+
+function updateLimerickHeading() {
+  const display = nameInput.value.trim();
   subjectNameEl.textContent = display ? ` ${display}` : "…";
 }
 
@@ -121,7 +175,9 @@ function showError(message) {
   errorMsg.textContent = message;
   errorMsg.hidden = !message;
   if (message) {
+    cancelTypewriter();
     limerickEl.hidden = true;
+    limerickEl.classList.remove("is-typing", "is-done");
     scrollToLimerick();
   } else {
     limerickEl.hidden = false;
@@ -129,22 +185,26 @@ function showError(message) {
 }
 
 function scrollToLimerick() {
+  const target = resultsSection || limerickResults;
   requestAnimationFrame(() => {
-    limerickResults.scrollIntoView({ behavior: "smooth", block: "start" });
+    requestAnimationFrame(() => {
+      const offset = 20;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    });
   });
 }
 
-function renderKit(kit, profile) {
+function renderKit(kit) {
   showError("");
-  if (profile?.name) updateLimerickHeading(profile.name);
-  limerickEl.textContent = kit.limerick || "";
-  limerickEl.hidden = false;
+  typeLimerick(limerickEl, kit.limerick || "");
   hasGenerated = true;
   scrollToLimerick();
 }
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  cancelTypewriter();
   showError("");
   if (hasGenerated) scrollToLimerick();
   setLoading(true);
@@ -168,7 +228,7 @@ form.addEventListener("submit", async (e) => {
       );
     }
 
-    renderKit(payload.kit, payload.profile);
+    renderKit(payload.kit);
   } catch (err) {
     showError(err.message);
   } finally {
