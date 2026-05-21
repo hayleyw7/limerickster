@@ -12,6 +12,8 @@ thumbnail: https://huggingface.co/spaces/hayleyw7/limerickster/resolve/main/stat
 
 # Limerickster
 
+Easily create a personalized limerick from a few details.
+
 Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, playful and personal).
 
 **Live app:** https://huggingface.co/spaces/hayleyw7/limerickster

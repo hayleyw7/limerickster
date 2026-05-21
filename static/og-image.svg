@@ -14,7 +14,7 @@
   <rect width="1200" height="630" fill="url(#bg-lav)"/>
   <rect width="1200" height="630" fill="url(#bg-peach)"/>
 
-  <text x="600" y="280" text-anchor="middle" font-family="'IBM Plex Mono', Menlo, Consolas, monospace" font-size="96" font-weight="500" fill="#1a1423">Limerickster</text>
+  <text x="600" y="240" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#3d8b7a" letter-spacing="0.12em">AI-POWERED VERSE FACTORY</text>
 
-  <text x="600" y="360" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#6b5f72">Easily create a personalized limerick from a few details.</text>
+  <text x="600" y="340" text-anchor="middle" font-family="'American Typewriter', 'Courier New', monospace" font-size="108" font-weight="bold" fill="#1a1423">Limerickster</text>
 </svg>
