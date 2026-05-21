@@ -75,9 +75,21 @@ def _exempt_localhost():
 SITE_DESCRIPTION = "Create a personalized limerick from a few details."
 
 
+def _public_site_url() -> str:
+    """Absolute HTTPS origin for OG tags (Discord, iMessage, etc.)."""
+    env_url = os.environ.get("SITE_URL", "").strip().rstrip("/")
+    if env_url:
+        return env_url
+    if not request:
+        return ""
+    scheme = request.headers.get("X-Forwarded-Proto", request.scheme)
+    host = request.headers.get("X-Forwarded-Host", request.host)
+    return f"{scheme}://{host}".rstrip("/")
+
+
 @app.context_processor
 def inject_site_meta():
-    site_url = os.environ.get("SITE_URL", "").rstrip("/")
+    site_url = _public_site_url()
     if site_url:
         return {
             "site_description": SITE_DESCRIPTION,

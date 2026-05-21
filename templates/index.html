@@ -19,6 +19,7 @@
   <meta property="og:title" content="Limerickster">
   <meta property="og:description" content="{{ site_description }}">
   <meta property="og:image" content="{{ site_og_image or url_for('static', filename='og-image.jpg', _external=True) }}">
+  <meta property="og:image:secure_url" content="{{ site_og_image or url_for('static', filename='og-image.jpg', _external=True) }}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Limerickster — typewriter-style AI limerick generator">
@@ -29,6 +30,7 @@
   <meta name="twitter:title" content="Limerickster">
   <meta name="twitter:description" content="{{ site_description }}">
   <meta name="twitter:image" content="{{ site_og_image or url_for('static', filename='og-image.jpg', _external=True) }}">
+  <link rel="canonical" href="{{ site_canonical_url or request.url_root }}">
   <meta name="twitter:image:alt" content="Limerickster — typewriter-style AI limerick generator">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
