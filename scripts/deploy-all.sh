@@ -48,11 +48,12 @@ api.add_space_secret(repo_id=repo, key="GROQ_API_KEY", value=os.environ["GROQ_AP
 api.add_space_secret(
     repo_id=repo,
     key="SITE_URL",
-    value="https://huggingface.co/spaces/hayleyw7/limerickster",
+    value="https://hayleyw7-limerickster.hf.space",
 )
 print("Secrets updated (Space will restart).")
 PY
 
-echo "Done: https://huggingface.co/spaces/hayleyw7/limerickster"
+echo "Live app: https://hayleyw7-limerickster.hf.space/"
+echo "Space admin: https://huggingface.co/spaces/hayleyw7/limerickster"
 echo "When the App tab shows Running, test Generate Limerick."
 echo "For friends: set Space visibility to Public in Settings."

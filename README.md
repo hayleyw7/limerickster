@@ -7,7 +7,7 @@ sdk: docker
 app_port: 7860
 pinned: false
 short_description: Easily create a personalized limerick from a few details.
-thumbnail: https://huggingface.co/spaces/hayleyw7/limerickster/resolve/main/static/og-image.jpg
+thumbnail: https://hayleyw7-limerickster.hf.space/static/og-image.jpg
 ---
 
 # Limerickster
@@ -16,7 +16,7 @@ Easily create a personalized limerick from a few details.
 
 Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, playful and personal).
 
-**Live app:** https://huggingface.co/spaces/hayleyw7/limerickster
+**Live app:** https://hayleyw7-limerickster.hf.space/
 
 ## Form fields
 
@@ -72,7 +72,7 @@ pip install pillow
 python scripts/generate_brand_assets.py
 ```
 
-For social crawlers to fetch the preview image, set **`SITE_URL`** in `.env` to your public HTTPS origin (e.g. `https://limerickster.example.com`). Without it, local `127.0.0.1` URLs won’t work when you paste the link elsewhere.
+For social crawlers to fetch the preview image, set **`SITE_URL`** in `.env` to your public HTTPS origin (e.g. `https://hayleyw7-limerickster.hf.space`). Without it, local `127.0.0.1` URLs won’t work when you paste the link elsewhere.
 
 After deploying, you can refresh cached previews with each platform’s debugger (e.g. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/), [Twitter Card Validator](https://cards-dev.twitter.com/validator)).
 

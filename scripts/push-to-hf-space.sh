@@ -16,4 +16,5 @@ fi
 
 REMOTE="https://hayleyw7:${HF_TOKEN}@huggingface.co/spaces/hayleyw7/limerickster"
 git push "${REMOTE}" main
-echo "Pushed. Space will rebuild: https://huggingface.co/spaces/hayleyw7/limerickster"
+echo "Pushed. Live app: https://hayleyw7-limerickster.hf.space/"
+echo "Space admin: https://huggingface.co/spaces/hayleyw7/limerickster"
