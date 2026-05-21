@@ -14,22 +14,9 @@
   <rect width="1200" height="630" fill="url(#bg-lav)"/>
   <rect width="1200" height="630" fill="url(#bg-peach)"/>
 
-  <text x="600" y="118" text-anchor="middle" font-size="64">⌨️</text>
+  <text x="600" y="200" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#3d8b7a" letter-spacing="0.12em">AI-POWERED VERSE FACTORY</text>
 
-  <text x="600" y="168" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="bold" fill="#3d8b7a" letter-spacing="0.12em">NEED A LIMERICK? HAVE AI DO IT!</text>
+  <text x="600" y="290" text-anchor="middle" font-family="'American Typewriter', 'Courier New', monospace" font-size="108" font-weight="bold" fill="#1a1423">Limerickster</text>
 
-  <text x="600" y="248" text-anchor="middle" font-family="'American Typewriter', 'Courier New', monospace" font-size="96" font-weight="bold" fill="#1a1423">Limerickster</text>
-
-  <text x="600" y="318" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="28" fill="#6b5f72">Tell us about someone — we&apos;ll write a five-line poem.</text>
-
-  <g transform="translate(600 400)" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="20" font-weight="bold">
-    <text x="-240" y="0" fill="#e85d4c">A</text>
-    <text x="-120" y="0" fill="#e85d4c">A</text>
-    <text x="0" y="0" fill="#3d8b7a">B</text>
-    <text x="120" y="0" fill="#3d8b7a">B</text>
-    <text x="240" y="0" fill="#e85d4c">A</text>
-  </g>
-
-  <rect x="420" y="468" width="360" height="58" rx="8" fill="#3d8b7a"/>
-  <text x="600" y="508" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="22" font-weight="bold" fill="#ffffff">Generate Limerick</text>
+  <text x="600" y="370" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#6b5f72">Tell us about someone, &amp; we'll write a five-line poem.</text>
 </svg>

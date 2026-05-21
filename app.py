@@ -73,7 +73,7 @@ def _exempt_localhost():
     return request.remote_addr in ("127.0.0.1", "::1")
 
 SITE_DESCRIPTION = (
-    "Tell us about someone, & we'll write a five-line poem."
+    "Tell us about someone, & we'll write a five-line poem. "
     "AI-powered verse factory."
 )
 

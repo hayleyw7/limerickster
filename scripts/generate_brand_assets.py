@@ -86,45 +86,19 @@ def _center_text(draw: ImageDraw.ImageDraw, y: int, text: str, font, fill: str) 
 
 
 def generate_og() -> None:
+    """Match the live app hero: cream/lavender/peach, mint eyebrow, typewriter title."""
     img = draw_site_background((1200, 630))
     draw = ImageDraw.Draw(img)
 
-    ef = emoji_font(72)
-    emoji = "⌨️"
-    bbox = draw.textbbox((0, 0), emoji, font=ef)
-    ew = bbox[2] - bbox[0]
-    draw.text(((1200 - ew) / 2, 72), emoji, font=ef, fill=INK)
-
-    _center_text(draw, 168, "NEED A LIMERICK? HAVE AI DO IT!", body_font(20, bold=True), MINT)
-    _center_text(draw, 218, "Limerickster", display_font(96), INK)
+    _center_text(draw, 200, "AI-POWERED VERSE FACTORY", body_font(22, bold=True), MINT)
+    _center_text(draw, 290, "Limerickster", display_font(108), INK)
     _center_text(
         draw,
-        318,
+        370,
         "Tell us about someone, & we'll write a five-line poem.",
-        body_font(28),
+        body_font(30),
         MUTED,
     )
-
-    rhyme_y = 400
-    labels = [("A", ACCENT), ("A", ACCENT), ("B", MINT), ("B", MINT), ("A", ACCENT)]
-    spacing = 120
-    start_x = 600 - (len(labels) - 1) * spacing / 2
-    font = body_font(20, bold=True)
-    for i, (letter, color) in enumerate(labels):
-        x = start_x + i * spacing
-        bbox = draw.textbbox((0, 0), letter, font=font)
-        tw = bbox[2] - bbox[0]
-        draw.text((x - tw / 2, rhyme_y), letter, font=font, fill=color)
-
-    btn_w, btn_h = 380, 58
-    btn_x = (1200 - btn_w) / 2
-    btn_y = 468
-    draw.rounded_rectangle(
-        (btn_x, btn_y, btn_x + btn_w, btn_y + btn_h),
-        radius=8,
-        fill=MINT,
-    )
-    _center_text(draw, btn_y + 15, "Generate Limerick", body_font(22, bold=True), "#ffffff")
 
     img.save(STATIC / "og-image.jpg", format="JPEG", quality=88, optimize=True)
     print(f"Wrote {STATIC / 'og-image.jpg'}")
