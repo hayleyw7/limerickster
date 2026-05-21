@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Regenerate favicon and OG images using exact site palette from style.css."""
+"""Regenerate favicon and OG images using exact site palette and fonts from style.css."""
 
+import urllib.request
 from pathlib import Path
+from typing import List, Optional
 
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 STATIC = ROOT / "static"
+FONTS = STATIC / "fonts"
 
 # style.css tokens
 CREAM = "#faf6ef"
@@ -20,33 +23,46 @@ PEACH = "#fde8d8"
 BORDER = "#e8dfd0"
 MUTED = "#6b5f72"
 
-FONT_MONO = [
-    "/System/Library/Fonts/Menlo.ttc",
+FONT_MONO = FONTS / "IBMPlexMono-Regular.ttf"
+FONT_SANS_SEMIBOLD = FONTS / "IBMPlexSans-SemiBold.ttf"
+
+FONT_MONO_FALLBACK = [
     "/System/Library/Fonts/Supplemental/Menlo.ttc",
-    "/System/Library/Fonts/Supplemental/Courier New.ttf",
     "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
 ]
-FONT_MONO_BOLD = [
-    "/System/Library/Fonts/Supplemental/Courier New Bold.ttf",
-    "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
-]
-def _open_font(candidates: list[str], size: int, index: int = 0) -> ImageFont.FreeTypeFont:
-    for path in candidates:
-        if Path(path).exists():
-            return ImageFont.truetype(path, size, index=index)
+
+FONT_DOWNLOADS = {
+    FONT_MONO: "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n5ig.ttf",
+    FONT_SANS_SEMIBOLD: "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXGKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1swZSAXcomDVmadSDNF5zAA.ttf",
+}
+
+
+def ensure_fonts() -> None:
+    FONTS.mkdir(parents=True, exist_ok=True)
+    for path, url in FONT_DOWNLOADS.items():
+        if path.exists():
+            continue
+        print(f"Downloading {path.name}...")
+        urllib.request.urlretrieve(url, path)
+
+
+def _open_font(path: Path, size: int, fallbacks: Optional[List[str]] = None) -> ImageFont.FreeTypeFont:
+    if path.exists():
+        return ImageFont.truetype(str(path), size)
+    for candidate in fallbacks or []:
+        if Path(candidate).exists():
+            return ImageFont.truetype(candidate, size)
     return ImageFont.load_default()
 
 
-def mono_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    return _open_font(FONT_MONO_BOLD if bold else FONT_MONO, size)
+def sans_font(size: int) -> ImageFont.FreeTypeFont:
+    """IBM Plex Sans 600 — matches .eyebrow (inherits body sans, weight 600)."""
+    return _open_font(FONT_SANS_SEMIBOLD, size)
 
 
-def display_font(size: int) -> ImageFont.FreeTypeFont:
-    return mono_font(size, bold=True)
-
-
-def body_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    return mono_font(size, bold=bold)
+def mono_font(size: int) -> ImageFont.FreeTypeFont:
+    """IBM Plex Mono 400 — matches .hero h1."""
+    return _open_font(FONT_MONO, size, FONT_MONO_FALLBACK)
 
 
 def draw_site_background(size: tuple[int, int]) -> Image.Image:
@@ -66,20 +82,54 @@ def draw_site_background(size: tuple[int, int]) -> Image.Image:
     return Image.alpha_composite(base.convert("RGBA"), overlay).convert("RGB")
 
 
-def _center_text(draw: ImageDraw.ImageDraw, y: int, text: str, font, fill: str) -> None:
+def _text_width(draw: ImageDraw.ImageDraw, text: str, font, letter_spacing: float = 0) -> float:
+    if not letter_spacing:
+        bbox = draw.textbbox((0, 0), text, font=font)
+        return bbox[2] - bbox[0]
+    return sum(
+        draw.textbbox((0, 0), ch, font=font)[2] - draw.textbbox((0, 0), ch, font=font)[0]
+        for ch in text
+    ) + letter_spacing * max(len(text) - 1, 0)
+
+
+def _center_text(
+    draw: ImageDraw.ImageDraw,
+    y: int,
+    text: str,
+    font,
+    fill: str,
+    *,
+    letter_spacing: float = 0,
+) -> None:
     w = draw.im.size[0]
-    bbox = draw.textbbox((0, 0), text, font=font)
-    tw = bbox[2] - bbox[0]
-    draw.text(((w - tw) / 2, y), text, font=font, fill=fill)
+    tw = _text_width(draw, text, font, letter_spacing)
+    x = (w - tw) / 2
+    if not letter_spacing:
+        draw.text((x, y), text, font=font, fill=fill)
+        return
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill)
+        x += draw.textbbox((0, 0), ch, font=font)[2] - draw.textbbox((0, 0), ch, font=font)[0] + letter_spacing
 
 
 def generate_og() -> None:
-    """Match the live app hero: cream/lavender/peach, mint eyebrow, typewriter title."""
+    """Match hero: IBM Plex Sans eyebrow + IBM Plex Mono title."""
     img = draw_site_background((1200, 630))
     draw = ImageDraw.Draw(img)
 
-    _center_text(draw, 240, "AI-POWERED VERSE FACTORY", body_font(22, bold=True), MINT)
-    _center_text(draw, 340, "Limerickster", display_font(108), INK)
+    eyebrow_font = sans_font(26)
+    title_font = mono_font(96)
+    eyebrow_tracking = 0.12 * 26  # letter-spacing: 0.12em from .eyebrow
+
+    _center_text(
+        draw,
+        248,
+        "AI-POWERED VERSE FACTORY",
+        eyebrow_font,
+        MINT,
+        letter_spacing=eyebrow_tracking,
+    )
+    _center_text(draw, 338, "Limerickster", title_font, INK, letter_spacing=96 * 0.02)
 
     img.save(STATIC / "og-image.jpg", format="JPEG", quality=88, optimize=True)
     print(f"Wrote {STATIC / 'og-image.jpg'}")
@@ -100,7 +150,7 @@ def generate_icon(size: int, out_name: str) -> None:
         fill=MINT,
     )
 
-    font = display_font(max(10, int(size * 0.46)))
+    font = mono_font(max(10, int(size * 0.46)))
     letter = "L"
     bbox = draw.textbbox((0, 0), letter, font=font)
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
@@ -118,6 +168,7 @@ def generate_icon(size: int, out_name: str) -> None:
 
 
 def main() -> None:
+    ensure_fonts()
     generate_og()
     generate_icon(32, "favicon-32.png")
     generate_icon(16, "favicon-16.png")

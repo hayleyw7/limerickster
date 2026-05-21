@@ -29,6 +29,9 @@ Thumbs.db
 *.swp
 *.swo
 
+# Bundled at generate time (HF rejects TTF binaries in git push)
+static/fonts/*.ttf
+
 # Local / debug
 *.log
 .pytest_cache/

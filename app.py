@@ -74,7 +74,7 @@ def _exempt_localhost():
 
 SITE_DESCRIPTION = "Easily create a personalized limerick from a few details."
 # Bump when og-image.jpg changes so crawlers (Discord, preview tools) refetch.
-OG_IMAGE_VERSION = "verse-factory"
+OG_IMAGE_VERSION = "ibm-plex"
 
 
 def _public_site_url() -> str:
