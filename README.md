@@ -27,7 +27,7 @@ Turn a person’s profile into a custom **five-line limerick** (AABBA rhyme, pla
 | **Favorite food or drink** | No | Sensory detail |
 | **Appearance** | No | Look and style detail for the poem |
 | **Job** | No | Day job or dream job |
-| **Other Notes** | No | Anything else to include (such as partner named Glorbo, inside joke about pizza, or to avoid a topic entirely) |
+| **Other notes** | No | Anything else to include (such as partner named Glorbo, inside joke about pizza, or to avoid a topic entirely) |
 | **Tone** | No (defaults to cheerful) | cheerful, wholesome, sarcastic, dramatic, absurd, or romantic |
 
 ## Setup

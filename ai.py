@@ -34,6 +34,9 @@ Do NOT capitalize common nouns or generic activities: memes, gaming, cats, pizza
 lowercase unless they are part of a proper name (e.g. "World of Warcraft", "New York").
 Keep hobbies, food, and everyday words in normal lowercase unless clearly a branded/titled proper noun.
 
+WORD BAN (mandatory):
+Never use the word "fine" in the limerick — not as an adjective, adverb, or in any phrase (e.g. "just fine", "feeling fine").
+
 Return ONLY valid JSON with this exact structure:
 {
   "limerick": "five-line limerick with \\n between lines",
@@ -85,13 +88,11 @@ def build_user_prompt(profile: dict) -> str:
         if value:
             lines.append(f"- {label}: {value}")
     if notes:
-        lines.append(f"- Other Notes: {notes}")
+        lines.append(f"- Other notes: {notes}")
         lines.append(
             "\n=== OTHER NOTES (follow closely) ===\n"
-            "Honor requests in Other Notes when possible. If the user asks for something "
-            'to be included (such as "you absolutely have to mention X no matter what"), '
-            'treat that as mandatory '
-            "in the limerick unless it conflicts with pronoun rules or would be harmful."
+            "Honor requests in Other notes 100%, no matter what. If the user asks for something "
+            "to be included or excluded, treat that as mandatory in the limerick."
         )
 
     name = profile.get("name", "").strip()
@@ -112,6 +113,7 @@ def build_user_prompt(profile: dict) -> str:
     lines.append(
         "\nWeave in as many provided details as fit naturally. "
         "The limerick is the star — make it personal, funny, and true to the tone. "
+        "Never use the word \"fine\" in the limerick. "
         "Capitalize names and places only — not common words like hobbies or memes."
     )
     lines.append("\nThank you!")
