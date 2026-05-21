@@ -78,8 +78,14 @@ def generate_og() -> None:
     img = draw_site_background((1200, 630))
     draw = ImageDraw.Draw(img)
 
-    _center_text(draw, 240, "AI-POWERED VERSE FACTORY", body_font(22, bold=True), MINT)
-    _center_text(draw, 340, "Limerickster", display_font(108), INK)
+    _center_text(draw, 260, "Limerickster", display_font(108), INK)
+    _center_text(
+        draw,
+        360,
+        "Create a personalized limerick from a few details.",
+        body_font(28),
+        MUTED,
+    )
 
     img.save(STATIC / "og-image.jpg", format="JPEG", quality=88, optimize=True)
     print(f"Wrote {STATIC / 'og-image.jpg'}")
