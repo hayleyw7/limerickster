@@ -1,4 +1,6 @@
 :root {
+  --font-display: "Special Elite", "Courier New", Courier, monospace;
+  --font-body: "Courier Prime", "Courier New", Courier, monospace;
   --ink: #1a1423;
   --cream: #faf6ef;
   --accent: #e85d4c;
@@ -21,7 +23,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: var(--font-body);
   color: var(--ink);
   background:
     radial-gradient(ellipse 80% 50% at 10% 0%, var(--lavender) 0%, transparent 55%),
@@ -51,7 +53,7 @@ body {
 }
 
 .hero h1 {
-  font-family: Fraunces, Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 3.75rem);
   font-weight: 800;
   margin: 0;
@@ -96,7 +98,7 @@ body {
 
 .card h2,
 .card h3 {
-  font-family: Fraunces, Georgia, serif;
+  font-family: var(--font-display);
   margin: 0 0 1rem;
 }
 
@@ -396,7 +398,7 @@ fieldset.hobbies legend {
 }
 
 .limerick {
-  font-family: Fraunces, Georgia, serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
   line-height: 1.7;
   margin: 0;
