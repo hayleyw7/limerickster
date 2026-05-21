@@ -33,12 +33,6 @@ FONT_TYPEWRITER_BODY_BOLD = [
     "/System/Library/Fonts/Supplemental/Courier New Bold.ttf",
     "/usr/share/fonts/truetype/liberation/LiberationMono-Bold.ttf",
 ]
-FONT_EMOJI = [
-    "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
-    "/Library/Fonts/Arial Unicode.ttf",
-]
-
-
 def _open_font(candidates: list[str], size: int, index: int = 0) -> ImageFont.FreeTypeFont:
     for path in candidates:
         if Path(path).exists():
@@ -52,13 +46,6 @@ def display_font(size: int) -> ImageFont.FreeTypeFont:
 
 def body_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
     return _open_font(FONT_TYPEWRITER_BODY_BOLD if bold else FONT_TYPEWRITER_BODY, size)
-
-
-def emoji_font(size: int) -> ImageFont.FreeTypeFont:
-    try:
-        return _open_font(FONT_EMOJI, size)
-    except OSError:
-        return display_font(size)
 
 
 def draw_site_background(size: tuple[int, int]) -> Image.Image:
@@ -90,55 +77,35 @@ def generate_og() -> None:
     img = draw_site_background((1200, 630))
     draw = ImageDraw.Draw(img)
 
-    _center_text(draw, 200, "AI-POWERED VERSE FACTORY", body_font(22, bold=True), MINT)
-    _center_text(draw, 290, "Limerickster", display_font(108), INK)
-    _center_text(
-        draw,
-        370,
-        "Tell us about someone, & we'll write a five-line poem.",
-        body_font(30),
-        MUTED,
-    )
+    _center_text(draw, 240, "AI-POWERED VERSE FACTORY", body_font(22, bold=True), MINT)
+    _center_text(draw, 340, "Limerickster", display_font(108), INK)
 
     img.save(STATIC / "og-image.jpg", format="JPEG", quality=88, optimize=True)
     print(f"Wrote {STATIC / 'og-image.jpg'}")
 
 
 def generate_icon(size: int, out_name: str) -> None:
+    """Match OG/hero: gradient background, mint eyebrow bar, typewriter L."""
     img = draw_site_background((size, size))
     draw = ImageDraw.Draw(img)
-    pad = max(1, size // 16)
-    draw.rounded_rectangle(
-        (pad, pad, size - pad, size - pad),
-        radius=max(2, size // 5),
-        fill=CARD,
-        outline=BORDER,
-        width=max(1, size // 32),
-    )
+    pad = max(2, size // 10)
 
-    bar_h = max(2, size // 16)
-    bar_w = size // 3
+    bar_h = max(2, size // 10)
+    bar_w = max(size // 2, size - pad * 4)
     bar_x = (size - bar_w) / 2
     draw.rounded_rectangle(
-        (bar_x, pad + 2, bar_x + bar_w, pad + 2 + bar_h),
-        radius=1,
+        (bar_x, pad, bar_x + bar_w, pad + bar_h),
+        radius=max(1, size // 32),
         fill=MINT,
     )
 
-    if size >= 32:
-        ef = emoji_font(int(size * 0.42))
-        emoji = "⌨️"
-        bbox = draw.textbbox((0, 0), emoji, font=ef)
-        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-        draw.text(((size - tw) / 2, size * 0.32), emoji, font=ef, fill=INK)
-    else:
-        font = display_font(int(size * 0.5))
-        letter = "L"
-        bbox = draw.textbbox((0, 0), letter, font=font)
-        tw = bbox[2] - bbox[0]
-        draw.text(((size - tw) / 2, size * 0.38), letter, font=font, fill=INK)
+    font = display_font(max(10, int(size * 0.46)))
+    letter = "L"
+    bbox = draw.textbbox((0, 0), letter, font=font)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    draw.text(((size - tw) / 2, (size - th) / 2 + size * 0.04), letter, font=font, fill=INK)
 
-    dot_r = max(2, size // 12)
+    dot_r = max(2, size // 10)
     draw.ellipse(
         (size - pad - dot_r * 2, size - pad - dot_r * 2, size - pad, size - pad),
         fill=ACCENT,
