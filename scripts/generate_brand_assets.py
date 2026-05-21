@@ -82,7 +82,7 @@ def generate_og() -> None:
     _center_text(
         draw,
         360,
-        "Create a personalized limerick from a few details.",
+        "Easily create a personalized limerick from a few details.",
         body_font(28),
         MUTED,
     )

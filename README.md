@@ -6,7 +6,7 @@ colorTo: pink
 sdk: docker
 app_port: 7860
 pinned: false
-short_description: Create a personalized limerick from a few details.
+short_description: Easily create a personalized limerick from a few details.
 thumbnail: https://huggingface.co/spaces/hayleyw7/limerickster/resolve/main/static/og-image.jpg
 ---
 

@@ -72,7 +72,7 @@ def _exempt_localhost():
         return False
     return request.remote_addr in ("127.0.0.1", "::1")
 
-SITE_DESCRIPTION = "Create a personalized limerick from a few details."
+SITE_DESCRIPTION = "Easily create a personalized limerick from a few details."
 
 
 def _public_site_url() -> str:

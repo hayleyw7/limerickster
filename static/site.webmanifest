@@ -1,7 +1,7 @@
 {
   "name": "Limerickster",
   "short_name": "Limerickster",
-  "description": "Create a personalized limerick from a few details.",
+  "description": "Easily create a personalized limerick from a few details.",
   "icons": [
     {
       "src": "/static/apple-touch-icon.png",
